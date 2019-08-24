@@ -14,8 +14,6 @@ public class User {
     @Id
     private Integer id;
     private String name;
-
-    @Field(index=false)
     private String address;
     private Integer sex;
 }

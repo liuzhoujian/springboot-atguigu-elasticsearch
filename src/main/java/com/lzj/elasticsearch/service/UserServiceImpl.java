@@ -6,6 +6,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -67,6 +68,9 @@ public class UserServiceImpl implements UserService {
 
     /**
      *对用户姓名进行分页查询
+     * match和term的区别
+     * term进行精确匹配
+     * match进行模糊匹配
      */
     @Override
     public Page<User> pageQuery(Integer pageNum, Integer pageSize, String q) {
@@ -80,6 +84,7 @@ public class UserServiceImpl implements UserService {
 
         //指定查询字段-多字段
         //MultiMatchQueryBuilder queryBuilder1 = QueryBuilders.multiMatchQuery(q, "name", "address");
+
 
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)

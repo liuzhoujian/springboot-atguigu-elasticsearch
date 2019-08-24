@@ -8,6 +8,7 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,9 +134,12 @@ public class SpringbootElasticsearchApplicationTests {
      */
     @Test
     public void testQueryPage() {
+
+
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                // .withQuery(QueryBuilders.matchQuery("name", "三"))  //分词
-                .withQuery(QueryBuilders.matchPhraseQuery("name", "三")) //不分词
+                // .withQuery(QueryBuilders.matchQuery("name", "李三"))  //分词
+                //.withQuery(QueryBuilders.matchPhraseQuery("name", "刘周健")) //精确匹配
+                .withQuery(QueryBuilders.termQuery("name", "zhangsan")) //精确匹配
                 .withPageable(PageRequest.of(0, 2))
                 .build();
 
